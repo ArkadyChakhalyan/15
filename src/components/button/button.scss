@@ -1,0 +1,26 @@
+.button {
+    height: 40px;
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    background: var(--color-main);
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--color-background-secondary);
+    opacity: 0.9;
+
+    &:not(:disabled) {
+        &:hover,
+        &:focus,
+        &:active {
+            box-shadow: 0 0 8px var(--color-accent);
+            opacity: 1;
+            outline: none;
+        }
+    }
+
+    & + & {
+        margin-left: 16px;
+    }
+}
