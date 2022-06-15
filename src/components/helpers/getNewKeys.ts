@@ -15,7 +15,7 @@ export const getNewKeys = (): TKey[] => {
         getNewKeys();
     }
 
-    return shuffledKeys;
+    return keys;
 }
 
 const shuffle = (
