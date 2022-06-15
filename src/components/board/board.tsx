@@ -1,11 +1,11 @@
-import './body.scss';
-import { CLASS_BODY } from "../../constants";
+import './board.scss';
+import { CLASS_BOARD } from "../../constants";
 import { Key } from "../key/key";
 import { getNewKeys } from "../helpers/getNewKeys";
 
-export const Body = () => {
+export const Board = () => {
     return(
-        <div className={CLASS_BODY}>
+        <div className={CLASS_BOARD}>
             {
                 getNewKeys().map((key) => {
                     return (
