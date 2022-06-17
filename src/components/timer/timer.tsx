@@ -1,10 +1,15 @@
 import './timer.scss';
 import { useEffect, useState } from "react";
-import { TKey } from "../../types";
 import { getTwoDigitTime } from "../helpers/getTwoDigitTime";
+import { ITimerProps } from "./types";
+import { useDispatch, useSelector } from "react-redux";
+import { IGameState } from "../../store/types";
+import { setTimeAC } from "../../store/scoreReducer";
 
-export const Timer = () => {
-    const board: TKey[] = [];
+export const Timer = ({}: ITimerProps) => {
+    const dispatch = useDispatch();
+
+    const time = useSelector(({ score }: IGameState) => score.time);
 
     let [hours, setHours] = useState(0);
     let [minutes, setMinutes] = useState(0);
@@ -16,16 +21,12 @@ export const Timer = () => {
     }
 
     useEffect(() => {
-        if (
-            seconds !== 0 &&
-            minutes !== 0 &&
-            hours !== 0
-        ) {
+        if (time === 0) {
             setSeconds(0);
             setMinutes(0);
             setHours(0);
         }
-    }, [board]);
+    }, [time]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -40,6 +41,8 @@ export const Timer = () => {
                     setHours(hours + 1);
                 }
             }
+
+            dispatch(setTimeAC({ time: time + 1}));
         }, 1000);
 
         return () => clearTimeout(timer);

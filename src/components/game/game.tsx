@@ -9,19 +9,27 @@ import { getNewKeys } from "../helpers/getNewKeys";
 import { setInitialKeysAC, setKeysAC } from "../../store/boardReducer";
 import { TKey } from "../../types";
 import { IGameState } from "../../store/types";
+import { setMovesAC, setTimeAC } from "../../store/scoreReducer";
 
 export const Game = () => {
     const dispatch = useDispatch();
-    const initialKeys = useSelector(({ board }: IGameState) => board.initialKeys) || [];
+    const initialKeys = useSelector(({ board }: IGameState) => board.initialKeys);
+
+    const refreshScore = () => {
+        dispatch(setTimeAC({ time: 0 }));
+        dispatch(setMovesAC({ moves: 0 }));
+    };
 
     const onStart = () => {
         const keys = getNewKeys();
         dispatch(setInitialKeysAC({ keys }));
         dispatch(setKeysAC({ keys }));
+        refreshScore();
     };
 
     const onRestart = () => {
         dispatch(setKeysAC({ keys: initialKeys }));
+        refreshScore();
     };
 
     const keys: TKey[] = useSelector(({ board }: IGameState) => board.keys);
