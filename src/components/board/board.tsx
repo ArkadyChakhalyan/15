@@ -1,13 +1,15 @@
 import './board.scss';
 import { CLASS_BOARD } from "../../constants";
 import { Key } from "../key/key";
-import { getNewKeys } from "../helpers/getNewKeys";
+import { IBoardProps } from "./types";
 
-export const Board = () => {
+export const Board = ({
+    keys
+}: IBoardProps) => {
     return(
         <div className={CLASS_BOARD}>
             {
-                getNewKeys().map((key) => {
+                keys.map((key) => {
                     return (
                         <Key
                             key={key}
