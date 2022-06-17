@@ -9,7 +9,10 @@ export const Board = () => {
             {
                 getNewKeys().map((key) => {
                     return (
-                        <Key label={key}/>
+                        <Key
+                            key={key}
+                            label={key}
+                        />
                     );
                 })
             }
