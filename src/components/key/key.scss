@@ -12,30 +12,45 @@
     font-weight: bold;
     cursor: pointer;
     transition: margin 0.3s ease-in-out;
+    opacity: 0;
+    box-shadow: 0 0 4px 2px var(--color-background-secondary);
 
     &--empty {
         visibility: hidden;
         cursor: default;
     }
 
-    &--hide {
-        animation: key-hide 1s ease-in-out;
-        box-shadow: 0 0 4px 2px #333842;
+    &--show {
+        animation: key-show 0.7s ease-in-out forwards;
+    }
+
+    &--visible {
+        opacity: 1;
     }
 }
 
-@keyframes key-hide {
+@keyframes key-show {
     0% {
-        transform: scale(100%);
+        opacity: 0;
+        transform: scale(50%);
     }
-    25% {
-        transform: scale(120%);
-    }
-    75% {
+    15% {
         opacity: 1;
     }
+    40% {
+        transform: scale(120%);
+    }
+
+    60% {
+        transform: scale(90%);
+    }
+
+    80% {
+        transform: scale(110%);
+    }
+
     100% {
-        opacity: 0;
-        transform: scale(25%);
+        transform: scale(100%);
+        opacity: 1;
     }
 }

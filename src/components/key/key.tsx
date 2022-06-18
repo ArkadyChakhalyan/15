@@ -1,7 +1,7 @@
 import './key.scss';
 import { CLASS_KEY, KEY_STEP } from "../../constants";
 import { EMoveDirection, IKeyProps } from "./types";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getKeysAfterMove } from "../helpers/getKeysAfterMove";
 import { useDispatch, useSelector } from "react-redux";
 import { setBlockMoves, setKeysAC } from "../../store/boardReducer";
@@ -21,9 +21,12 @@ export const Key = ({
     const moves = useSelector(({ score }: IGameState) => score.moves);
 
     const classEmpty = CLASS_KEY + '--empty';
+    const classShow = CLASS_KEY + '--show';
+    const classVisible = CLASS_KEY + '--visible';
 
+    const uniqueNumber = Math.round(Math.random() * 500);
     const ref = useRef(null);
-    const [isHide, setHide] = useState(false);
+    const [show, setShow] = useState(false);
 
     const onClick = () => {
         if (
@@ -79,14 +82,26 @@ export const Key = ({
         }
     };
 
+    useEffect(() => {
+        if (moves === 0) {
+            setShow(true);
+        }
+    }, []);
+
     return (
         <div
             className={`
                 ${CLASS_KEY}
+                ${show ? classShow : classVisible}
                 ${!label ? classEmpty : ''}
             `}
             ref={ref}
-            style={{left, top}}
+            style={{
+                left,
+                top,
+                zIndex: uniqueNumber,
+                animationDelay: uniqueNumber + 'ms'
+            }}
             onClick={onClick}
         >
             {label}
