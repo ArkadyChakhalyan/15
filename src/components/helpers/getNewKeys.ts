@@ -1,6 +1,7 @@
-import { TKey } from "../../types";
+import { TKey, TKeyLine } from "../../types";
+import { EMPTY_KEY } from "../../constants";
 
-export const getNewKeys = (): TKey[] => {
+export const getNewKeys = (): TKeyLine[] => {
     let keys: TKey[] = [];
 
     for (let i = 0; i <= 15; i++) {
@@ -15,7 +16,7 @@ export const getNewKeys = (): TKey[] => {
         getNewKeys();
     }
 
-    return keys;
+    return setKeysInGrid(keys);
 }
 
 const shuffle = (
@@ -38,6 +39,25 @@ const keysToResult = (
     keys: TKey[]
 ): string => {
     return keys
-        .filter((key) => key !== 0)
+        .filter((key) => key !== EMPTY_KEY)
         .join('');
+}
+
+const setKeysInGrid = (
+    keys: TKey[]
+): TKeyLine[] => {
+    const keysInGrid: TKeyLine[] = [];
+    const _keys: TKey[] = [...keys];
+
+    for (let i = 0; i < 4; i++) {
+        const line: TKey[] = [];
+
+        for (let j = 0; j < 4; j++) {
+            line.push(_keys.shift() as TKey);
+        }
+
+        keysInGrid.push(line);
+    }
+
+    return keysInGrid;
 }

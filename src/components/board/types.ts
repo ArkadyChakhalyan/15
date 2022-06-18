@@ -1,5 +1,5 @@
-import { TKey } from "../../types";
+import { TKeyLine } from "../../types";
 
 export interface IBoardProps {
-    keys: TKey[];
+    keys: TKeyLine[];
 }

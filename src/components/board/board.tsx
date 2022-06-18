@@ -1,7 +1,7 @@
 import './board.scss';
 import { CLASS_BOARD } from "../../constants";
-import { Key } from "../key/key";
 import { IBoardProps } from "./types";
+import { KeyLine } from "../keyLine/keyLine";
 
 export const Board = ({
     keys
@@ -9,11 +9,13 @@ export const Board = ({
     return(
         <div className={CLASS_BOARD}>
             {
-                keys.map((key) => {
+                keys.map((line, index) => {
                     return (
-                        <Key
-                            key={key}
-                            label={key}
+                        <KeyLine
+                            key={index}
+                            keys={keys}
+                            line={line}
+                            lineIdx={index}
                         />
                     );
                 })

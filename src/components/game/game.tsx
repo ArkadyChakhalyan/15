@@ -7,7 +7,7 @@ import { Footer } from "../footer/footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewKeys } from "../helpers/getNewKeys";
 import { setInitialKeysAC, setKeysAC } from "../../store/boardReducer";
-import { TKey } from "../../types";
+import { TKeyLine } from "../../types";
 import { IGameState } from "../../store/types";
 import { setMovesAC, setTimeAC } from "../../store/scoreReducer";
 
@@ -32,7 +32,7 @@ export const Game = () => {
         refreshScore();
     };
 
-    const keys: TKey[] = useSelector(({ board }: IGameState) => board.keys);
+    const keys: TKeyLine[] = useSelector(({ board }: IGameState) => board.keys);
 
     useEffect(() => {
         onStart();

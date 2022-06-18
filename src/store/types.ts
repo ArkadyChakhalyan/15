@@ -1,4 +1,4 @@
-import { TKey } from "../types";
+import { TKeyLine } from "../types";
 import { store } from "./store";
 
 export interface IGameState {
@@ -12,8 +12,9 @@ export interface IScoreState {
 }
 
 export interface IBoardState {
-    initialKeys: TKey[];
-    keys: TKey[];
+    initialKeys: TKeyLine[];
+    keys: TKeyLine[];
+    blockMoves: boolean;
 }
 
 export type RootState = ReturnType<typeof store.getState>
