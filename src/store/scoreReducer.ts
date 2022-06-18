@@ -3,7 +3,11 @@ import { IScoreState } from "./types";
 
 const initialState: IScoreState = {
     time: 0,
-    moves: 0
+    moves: 0,
+    highscore: {
+        time: 0,
+        moves: 0
+    }
 }
 
 export const scoreSlice = createSlice({

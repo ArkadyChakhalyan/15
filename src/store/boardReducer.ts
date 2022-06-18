@@ -5,7 +5,8 @@ import { TKeyLine } from "../types";
 const initialState: IBoardState = {
     keys: [],
     initialKeys: [],
-    blockMoves: false
+    blockMoves: false,
+    isBoardCompleted: false
 }
 
 export const boardSlice = createSlice({
@@ -20,10 +21,13 @@ export const boardSlice = createSlice({
         },
         setBlockMoves: (state, action: PayloadAction<{ blockMoves: boolean }>) => {
             state.blockMoves = action.payload.blockMoves;
+        },
+        setIsBoardCompleted: (state, action: PayloadAction<{ isBoardCompleted: boolean }>) => {
+            state.isBoardCompleted = action.payload.isBoardCompleted;
         }
     }
 })
 
-export const { setKeysAC, setInitialKeysAC, setBlockMoves } = boardSlice.actions;
+export const { setKeysAC, setInitialKeysAC, setBlockMoves, setIsBoardCompleted } = boardSlice.actions;
 
 export default boardSlice.reducer;

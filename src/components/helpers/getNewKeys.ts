@@ -1,5 +1,5 @@
 import { TKey, TKeyLine } from "../../types";
-import { EMPTY_KEY } from "../../constants";
+import { checkIfKeysCompleted } from "./checkIfKeysCompleted";
 
 export const getNewKeys = (): TKeyLine[] => {
     let keys: TKey[] = [];
@@ -10,7 +10,7 @@ export const getNewKeys = (): TKeyLine[] => {
 
     const shuffledKeys = shuffle(keys);
 
-    if (!checkIfCompleted(shuffledKeys, keys)) {
+    if (!checkIfKeysCompleted(shuffledKeys)) {
         keys = shuffledKeys;
     } else {
         getNewKeys();
@@ -26,21 +26,6 @@ const shuffle = (
         .map(key => ({ key, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ key }) => key);
-}
-
-const checkIfCompleted = (
-    keys: TKey[],
-    completedKeys: TKey[]
-): boolean => {
-    return keysToResult(keys).includes(keysToResult(completedKeys));
-}
-
-const keysToResult = (
-    keys: TKey[]
-): string => {
-    return keys
-        .filter((key) => key !== EMPTY_KEY)
-        .join('');
 }
 
 const setKeysInGrid = (

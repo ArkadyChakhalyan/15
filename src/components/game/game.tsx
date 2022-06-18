@@ -6,18 +6,22 @@ import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewKeys } from "../helpers/getNewKeys";
-import { setInitialKeysAC, setKeysAC } from "../../store/boardReducer";
+import { setBlockMoves, setInitialKeysAC, setIsBoardCompleted, setKeysAC } from "../../store/boardReducer";
 import { TKeyLine } from "../../types";
 import { IGameState } from "../../store/types";
 import { setMovesAC, setTimeAC } from "../../store/scoreReducer";
+import { checkIfKeysCompleted } from "../helpers/checkIfKeysCompleted";
+import { getKeysInArray } from "../helpers/getKeysInArray";
 
 export const Game = () => {
     const dispatch = useDispatch();
     const initialKeys = useSelector(({ board }: IGameState) => board.initialKeys);
+    const keys: TKeyLine[] = useSelector(({ board }: IGameState) => board.keys);
 
     const refreshScore = () => {
         dispatch(setTimeAC({ time: 0 }));
         dispatch(setMovesAC({ moves: 0 }));
+        dispatch(setIsBoardCompleted({ isBoardCompleted: false }));
     };
 
     const onStart = () => {
@@ -32,11 +36,16 @@ export const Game = () => {
         refreshScore();
     };
 
-    const keys: TKeyLine[] = useSelector(({ board }: IGameState) => board.keys);
-
     useEffect(() => {
         onStart();
     }, []);
+
+    useEffect(() => {
+        if (checkIfKeysCompleted(getKeysInArray(keys))) {
+            dispatch(setBlockMoves({ blockMoves: true }));
+            dispatch(setIsBoardCompleted({ isBoardCompleted: true }));
+        }
+    }, [keys]);
 
     return (
         <div className={CLASS_GAME}>

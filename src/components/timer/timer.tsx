@@ -10,6 +10,7 @@ export const Timer = ({}: ITimerProps) => {
     const dispatch = useDispatch();
 
     const time = useSelector(({ score }: IGameState) => score.time);
+    const isBoardCompleted = useSelector(({ board }: IGameState) => board.isBoardCompleted);
 
     let [hours, setHours] = useState(0);
     let [minutes, setMinutes] = useState(0);
@@ -30,6 +31,7 @@ export const Timer = ({}: ITimerProps) => {
 
     useEffect(() => {
         const timer = setInterval(() => {
+
             if (seconds < 59) {
                 setSeconds(seconds + 1);
             } else {
@@ -44,6 +46,10 @@ export const Timer = ({}: ITimerProps) => {
 
             dispatch(setTimeAC({ time: time + 1}));
         }, 1000);
+
+        if (isBoardCompleted) {
+            clearTimeout(timer);
+        }
 
         return () => clearTimeout(timer);
     }, [seconds, minutes, hours]);

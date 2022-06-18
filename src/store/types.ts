@@ -9,12 +9,19 @@ export interface IGameState {
 export interface IScoreState {
     time: number;
     moves: number;
+    highscore: IHighscore;
+}
+
+interface IHighscore {
+    time: number;
+    moves: number;
 }
 
 export interface IBoardState {
     initialKeys: TKeyLine[];
     keys: TKeyLine[];
     blockMoves: boolean;
+    isBoardCompleted: boolean;
 }
 
 export type RootState = ReturnType<typeof store.getState>
