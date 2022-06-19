@@ -1,4 +1,4 @@
-.key {
+.tile {
     position: absolute;
     display: flex;
     align-items: center;
@@ -21,7 +21,7 @@
     }
 
     &--show {
-        animation: key-show 0.7s ease-in-out forwards;
+        animation: tile-show 0.7s ease-in-out forwards;
     }
 
     &--visible {
@@ -29,7 +29,7 @@
     }
 }
 
-@keyframes key-show {
+@keyframes tile-show {
     0% {
         opacity: 0;
         transform: scale(50%);

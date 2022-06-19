@@ -5,18 +5,19 @@ import { Board } from "../board/board";
 import { Header } from "../header/header";
 import { Footer } from "../footer/footer";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewKeys } from "../helpers/getNewKeys";
-import { setBlockMoves, setInitialKeysAC, setIsBoardCompleted, setKeysAC } from "../../store/boardReducer";
-import { TKeyLine } from "../../types";
+import { getNewTiles } from "../helpers/getNewTiles";
+import { setBlockMoves, setInitialTilesAC, setIsBoardCompleted, setTilesAC } from "../../store/boardReducer";
+import { TTileRow } from "../../types";
 import { IGameState } from "../../store/types";
 import { setMovesAC, setTimeAC } from "../../store/scoreReducer";
-import { checkIfKeysCompleted } from "../helpers/checkIfKeysCompleted";
-import { getKeysInArray } from "../helpers/getKeysInArray";
+import { checkIfTilesCompleted } from "../helpers/checkIfTilesCompleted";
+import { getTilesInArray } from "../helpers/getTilesInArray";
+import { Rules } from "../rules/rules";
 
 export const Game = () => {
     const dispatch = useDispatch();
-    const initialKeys = useSelector(({ board }: IGameState) => board.initialKeys);
-    const keys: TKeyLine[] = useSelector(({ board }: IGameState) => board.keys);
+    const initialTiles = useSelector(({ board }: IGameState) => board.initialTiles);
+    const tiles: TTileRow[] = useSelector(({ board }: IGameState) => board.tiles);
 
     const refreshScore = () => {
         dispatch(setTimeAC({ time: 0 }));
@@ -25,14 +26,14 @@ export const Game = () => {
     };
 
     const onStart = () => {
-        const keys = getNewKeys();
-        dispatch(setInitialKeysAC({ keys }));
-        dispatch(setKeysAC({ keys }));
+        const tiles = getNewTiles();
+        dispatch(setInitialTilesAC({ tiles }));
+        dispatch(setTilesAC({ tiles }));
         refreshScore();
     };
 
     const onRestart = () => {
-        dispatch(setKeysAC({ keys: initialKeys }));
+        dispatch(setTilesAC({ tiles: initialTiles }));
         refreshScore();
     };
 
@@ -41,21 +42,22 @@ export const Game = () => {
     }, []);
 
     useEffect(() => {
-        if (checkIfKeysCompleted(getKeysInArray(keys))) {
+        if (checkIfTilesCompleted(getTilesInArray(tiles))) {
             dispatch(setBlockMoves({ blockMoves: true }));
             dispatch(setIsBoardCompleted({ isBoardCompleted: true }));
         }
-    }, [keys]);
+    }, [tiles]);
 
     return (
         <div className={CLASS_GAME}>
             <Header />
-            <Board keys={keys} />
+            <Board tiles={tiles} />
             <Footer
-                isDisabled={!initialKeys}
+                isDisabled={!initialTiles}
                 onRestart={onRestart}
                 onStart={onStart}
             />
+            <Rules />
         </div>
     );
 }

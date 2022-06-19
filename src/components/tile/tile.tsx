@@ -1,28 +1,28 @@
-import './key.scss';
-import { CLASS_KEY, KEY_STEP } from "../../constants";
-import { EMoveDirection, IKeyProps } from "./types";
+import './tile.scss';
+import { CLASS_TILE, TILE_STEP } from "../../constants";
+import { EMoveDirection, ITileProps } from "./types";
 import { useEffect, useRef, useState } from "react";
-import { getKeysAfterMove } from "../helpers/getKeysAfterMove";
+import { getTilesAfterMove } from "../helpers/getTilesAfterMove";
 import { useDispatch, useSelector } from "react-redux";
-import { setBlockMoves, setKeysAC } from "../../store/boardReducer";
+import { setBlockMoves, setTilesAC } from "../../store/boardReducer";
 import { IGameState } from "../../store/types";
 import { setMovesAC } from "../../store/scoreReducer";
 
-export const Key = ({
-    keys,
+export const Tile = ({
+    tiles,
     label,
     direction,
     left,
     top,
-}: IKeyProps) => {
+}: ITileProps) => {
     const dispatch = useDispatch();
 
     const blockMove = useSelector(({ board }: IGameState) => board.blockMoves);
     const moves = useSelector(({ score }: IGameState) => score.moves);
 
-    const classEmpty = CLASS_KEY + '--empty';
-    const classShow = CLASS_KEY + '--show';
-    const classVisible = CLASS_KEY + '--visible';
+    const classEmpty = CLASS_TILE + '--empty';
+    const classShow = CLASS_TILE + '--show';
+    const classVisible = CLASS_TILE + '--visible';
 
     const uniqueNumber = Math.round(Math.random() * 500);
     const ref = useRef(null);
@@ -40,11 +40,11 @@ export const Key = ({
         dispatch(setMovesAC({ moves: moves + 1 }));
 
         setTimeout(() => {
-            dispatch(setKeysAC({ keys: getKeysAfterMove(keys, label) }));
+            dispatch(setTilesAC({ tiles: getTilesAfterMove(tiles, label) }));
 
             if (ref && ref.current) {
-                const key = ref.current as HTMLElement;
-                key.style.margin = '';
+                const tile = ref.current as HTMLElement;
+                tile.style.margin = '';
             }
 
             dispatch(setBlockMoves({ blockMoves: false }));
@@ -53,29 +53,29 @@ export const Key = ({
         switch (direction) {
             case EMoveDirection.DOWN: {
                 if (ref && ref.current) {
-                    const key = ref.current as HTMLElement;
-                    key.style.marginTop = `${KEY_STEP}px`;
+                    const tile = ref.current as HTMLElement;
+                    tile.style.marginTop = `${TILE_STEP}px`;
                 }
                 return;
             }
             case EMoveDirection.UP: {
                 if (ref && ref.current) {
-                    const key = ref.current as HTMLElement;
-                    key.style.marginTop = `${-KEY_STEP}px`;
+                    const tile = ref.current as HTMLElement;
+                    tile.style.marginTop = `${-TILE_STEP}px`;
                 }
                 return;
             }
             case EMoveDirection.LEFT: {
                 if (ref && ref.current) {
-                    const key = ref.current as HTMLElement;
-                    key.style.marginLeft = `${-KEY_STEP}px`;
+                    const tile = ref.current as HTMLElement;
+                    tile.style.marginLeft = `${-TILE_STEP}px`;
                 }
                 return;
             }
             case EMoveDirection.RIGHT: {
                 if (ref && ref.current) {
-                    const key = ref.current as HTMLElement;
-                    key.style.marginLeft = `${KEY_STEP}px`;
+                    const tile = ref.current as HTMLElement;
+                    tile.style.marginLeft = `${TILE_STEP}px`;
                 }
                 return;
             }
@@ -91,7 +91,7 @@ export const Key = ({
     return (
         <div
             className={`
-                ${CLASS_KEY}
+                ${CLASS_TILE}
                 ${show ? classShow : classVisible}
                 ${!label ? classEmpty : ''}
             `}

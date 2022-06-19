@@ -1,3 +1,3 @@
-export type TKey = number;
+export type TTile = number;
 
-export type TKeyLine = TKey[];
+export type TTileRow = TTile[];

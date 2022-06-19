@@ -1,20 +1,20 @@
 import './board.scss';
 import { CLASS_BOARD } from "../../constants";
 import { IBoardProps } from "./types";
-import { KeyLine } from "../keyLine/keyLine";
+import { TileRow } from "../tileRow/tileRow";
 
 export const Board = ({
-    keys
+    tiles
 }: IBoardProps) => {
     return(
         <div className={CLASS_BOARD}>
             {
-                keys.map((line, index) => {
+                tiles.map((row, index) => {
                     return (
-                        <KeyLine
+                        <TileRow
                             key={index}
-                            keys={keys}
-                            line={line}
+                            tiles={tiles}
+                            row={row}
                             lineIdx={index}
                         />
                     );

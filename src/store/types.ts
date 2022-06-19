@@ -1,4 +1,4 @@
-import { TKeyLine } from "../types";
+import { TTileRow } from "../types";
 import { store } from "./store";
 
 export interface IGameState {
@@ -18,8 +18,8 @@ interface IHighscore {
 }
 
 export interface IBoardState {
-    initialKeys: TKeyLine[];
-    keys: TKeyLine[];
+    initialTiles: TTileRow[];
+    tiles: TTileRow[];
     blockMoves: boolean;
     isBoardCompleted: boolean;
 }

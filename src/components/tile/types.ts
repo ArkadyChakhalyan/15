@@ -1,7 +1,7 @@
-import { TKeyLine } from "../../types";
+import { TTileRow } from "../../types";
 
-export interface IKeyProps {
-    keys: TKeyLine[];
+export interface ITileProps {
+    tiles: TTileRow[];
     label: number;
     direction: EMoveDirection;
     left: number;

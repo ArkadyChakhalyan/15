@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IBoardState } from "./types";
-import { TKeyLine } from "../types";
+import { TTileRow } from "../types";
 
 const initialState: IBoardState = {
-    keys: [],
-    initialKeys: [],
+    tiles: [],
+    initialTiles: [],
     blockMoves: false,
     isBoardCompleted: false
 }
@@ -13,11 +13,11 @@ export const boardSlice = createSlice({
     name: 'board',
     initialState,
     reducers: {
-        setInitialKeysAC: (state, action: PayloadAction<{ keys: TKeyLine[] }>) => {
-            state.initialKeys = action.payload.keys;
+        setInitialTilesAC: (state, action: PayloadAction<{ tiles: TTileRow[] }>) => {
+            state.initialTiles = action.payload.tiles;
         },
-        setKeysAC: (state, action: PayloadAction<{ keys: TKeyLine[] }>) => {
-            state.keys = action.payload.keys;
+        setTilesAC: (state, action: PayloadAction<{ tiles: TTileRow[] }>) => {
+            state.tiles = action.payload.tiles;
         },
         setBlockMoves: (state, action: PayloadAction<{ blockMoves: boolean }>) => {
             state.blockMoves = action.payload.blockMoves;
@@ -28,6 +28,6 @@ export const boardSlice = createSlice({
     }
 })
 
-export const { setKeysAC, setInitialKeysAC, setBlockMoves, setIsBoardCompleted } = boardSlice.actions;
+export const { setTilesAC, setInitialTilesAC, setBlockMoves, setIsBoardCompleted } = boardSlice.actions;
 
 export default boardSlice.reducer;

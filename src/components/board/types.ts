@@ -1,5 +1,5 @@
-import { TKeyLine } from "../../types";
+import { TTileRow } from "../../types";
 
 export interface IBoardProps {
-    keys: TKeyLine[];
+    tiles: TTileRow[];
 }
