@@ -18,7 +18,7 @@ export const TileRow = ({
 
                     return (
                         <Tile
-                            key={tile + Math.random()}
+                            key={Number(tile) + Math.random() || Math.random()}
                             tiles={tiles}
                             label={tile}
                             direction={direction}

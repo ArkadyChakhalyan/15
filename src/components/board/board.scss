@@ -6,4 +6,14 @@
     padding: 16px;
     background: var(--color-background-secondary);
     box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.4);
+
+    &--template {
+        transform: scale(80%);
+        pointer-events: none;
+
+        .tile {
+            opacity: 1;
+            animation: none;
+        }
+    }
 }

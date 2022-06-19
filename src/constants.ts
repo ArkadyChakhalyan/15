@@ -8,6 +8,7 @@ export const CLASS_FOOTER = 'footer';
 export const CLASS_BUTTON = 'button';
 export const CLASS_TILE = 'tile';
 export const CLASS_RULES = 'rules';
+export const CLASS_CONGRATS = 'congrats';
 
 export const EMPTY_TILE = 0;
 

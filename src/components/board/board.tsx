@@ -4,10 +4,17 @@ import { IBoardProps } from "./types";
 import { TileRow } from "../tileRow/tileRow";
 
 export const Board = ({
-    tiles
+    tiles,
+    isTemplate
 }: IBoardProps) => {
+    const classTemplate = CLASS_BOARD + '--template';
+
     return(
-        <div className={CLASS_BOARD}>
+        <div className={`
+                ${CLASS_BOARD}
+                ${isTemplate ? classTemplate : ''}
+            `}
+        >
             {
                 tiles.map((row, index) => {
                     return (

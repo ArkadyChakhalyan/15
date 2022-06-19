@@ -13,7 +13,7 @@ export const Tile = ({
     label,
     direction,
     left,
-    top,
+    top
 }: ITileProps) => {
     const dispatch = useDispatch();
 

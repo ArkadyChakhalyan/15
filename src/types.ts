@@ -1,3 +1,3 @@
-export type TTile = number;
+export type TTile = number | string;
 
 export type TTileRow = TTile[];

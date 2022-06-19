@@ -1,8 +1,8 @@
-import { TTileRow } from "../../types";
+import { TTile, TTileRow } from "../../types";
 
 export interface ITileProps {
     tiles: TTileRow[];
-    label: number;
+    label: TTile;
     direction: EMoveDirection;
     left: number;
     top: number;

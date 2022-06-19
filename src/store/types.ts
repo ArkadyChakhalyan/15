@@ -9,12 +9,6 @@ export interface IGameState {
 export interface IScoreState {
     time: number;
     moves: number;
-    highscore: IHighscore;
-}
-
-interface IHighscore {
-    time: number;
-    moves: number;
 }
 
 export interface IBoardState {
